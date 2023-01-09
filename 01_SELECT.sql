@@ -88,9 +88,12 @@ SELECT DISTINCT DEPT_CODE, JOB_CODE FROM EMPLOYEE;
 
 --------------------------------------------------------------
 
+-- 앞에 숫자 = 해석 순서
 -- 3. SELECT절 : SELECT 컬럼명 
 -- 1. FROM절 : FROM 테이블명
 -- 2. WHERE절(조건절) : WHERE 컬럼명 연산자 값;
+-- 4. ORDER BY 컬럼명 | 별칭 | 컬럼 순서 [ACS | DESC] [NULLS FIRST | LAST]
+--								  (오름 / 내림차순) (NULL 정렬)
 
 -- EMPLOYEE 테이블에서 급여가 3백만원 초과인 사원의 
 -- 사번, 이름, 급여, 부서코드를 조회
@@ -231,3 +234,86 @@ AND SALARY >= 2700000;
  * 8. OR (논리연산자)
  * 
  * */
+
+--------------------------------------------------------------
+
+/* IN 연산자
+ * 
+ * 비교하려는 값과 목록에 작성된 값 중
+ * 일치하는 것이 있으면 조회하는 연산자
+ * 
+ * [ 작성법 ]
+ * WHERE 컬럼명 IN(값1, 값2, 값3...)
+ * */
+
+-- EMPLOYEE 테이블에서
+-- 부서코드가 D1, D6, D9 인 사원의
+-- 사번, 이름, 부서코드 조회
+
+SELECT EMP_ID , EMP_NAME , DEPT_CODE
+FROM EMPLOYEE
+WHERE DEPT_CODE IN('D1', 'D6', 'D9'); -- 9명 / 23명
+
+/* IN()을 쓰지 않는 경우
+WHERE DEPT_CODE = 'D1'
+OR DEPT_CODE = 'D6'
+OR DEPT_CODE = 'D9');
+*/
+
+-- NOT IN
+SELECT EMP_ID , EMP_NAME , DEPT_CODE
+FROM EMPLOYEE
+WHERE DEPT_CODE NOT IN('D1', 'D6', 'D9') -- 12명 / 23명
+OR DEPT_CODE IS NULL; -- 14명 / 23명 (부서코드 없는 2명 포함)
+
+-- IS NULL
+-- IS NOT NULL
+
+--------------------------------------------------------------
+
+-- NULL 처리 연산자
+
+-- JAVA에서 NULL : 참조하는 객체가 없음을 의미하는 값
+-- DB에서 NULL : 컬럼에 값이 없음을 의미하는 값
+
+-- 1) IS NULL : NULL인 경우 조회
+-- 2) IS NOT NULL : NULL이 아닌 경우 조회
+
+-- EMPLOYEE 테이블에서 보너스가 있는 사원의 이름, 보너스 조회
+SELECT EMP_NAME , BONUS  
+FROM EMPLOYEE
+WHERE BONUS IS NOT NULL;
+
+--------------------------------------------------------------
+
+-- ORDER BY절
+-- EMPLOYEE 테이블 급여 오름차순으로
+-- 사번, 이름, 급여 조회
+
+SELECT EMP_ID, EMP_NAME, SALARY
+FROM EMPLOYEE
+ORDER BY SALARY; -- ASC가 기본값
+
+-- 급여 200만 이상인 사원의
+-- 사번, 이름, 급여 조회
+-- 단, 급여 내림차순으로 조회
+
+SELECT EMP_ID, EMP_NAME, SALARY
+FROM EMPLOYEE
+WHERE SALARY >= 2000000
+ORDER BY SALARY DESC;
+
+-- 입사일 순서대로 이름, 입사일 조회(별칭 사용)
+SELECT EMP_NAME 이름, HIRE_DATE 입사일
+FROM EMPLOYEE
+ORDER BY 입사일;
+
+-- 부서별 (DEPT_CODE)로 급여 내림차순 정렬
+-- D1 부서에서 가장 많은 ~ 가장 적은 사람까지 내림차순 정렬
+-- D2 부서에서 가장 많은 ~ 가장 적은 사람까지 내림차순 정렬
+-- ...
+
+-- 정렬 중첩 : 대분류 정렬 후 소분류 정렬
+SELECT EMP_NAME, DEPT_CODE, SALARY 
+FROM EMPLOYEE
+ORDER BY DEPT_CODE, SALARY DESC; 
