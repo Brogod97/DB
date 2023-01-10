@@ -52,7 +52,7 @@ WHERE PREATTENDING_CLASS_NO IS NOT NULL;
 -- 9. 춘 대학에는 어떤 계열(CATEGORY)들이 있는지 조회해보시오.
 SELECT DISTINCT CATEGORY
 FROM TB_DEPARTMENT
-ORDER BY CATEGORY ;
+ORDER BY CATEGORY;
 
 /* 10. 02학번 전주 거주자들의 모임을 만들려고 한다.
  * 휴학한 사람들은 제외한 재학중인 학생들의 학번, 이름, 주민번호를 출력하는 구문을 작성하시오.
