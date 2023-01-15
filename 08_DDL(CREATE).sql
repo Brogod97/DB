@@ -20,9 +20,9 @@
 -- 데이터의 전체 구조를 정의하는 언어로 주로 DB관리자, 설계자가 사용함.
 
 -- 오라클에서의 객체 : 테이블(TABLE), 뷰(VIEW), 시퀀스(SEQUENCE), 
--- 					   인덱스(INDEX), 패키지(PACKAGE), 트리거(TRIGGER)
---					   프로시저(PROCEDURE), 함수(FUNCTION),
--- 					   동의어(SYNOMYM), 사용자(USER)
+-- 			인덱스(INDEX), 패키지(PACKAGE), 트리거(TRIGGER)
+--			프로시저(PROCEDURE), 함수(FUNCTION),
+-- 			동의어(SYNOMYM), 사용자(USER)
 
 
 ------------------------------------------------------------------------
@@ -187,7 +187,7 @@ SELECT * FROM USER_CONSTRAINTS;
 
 CREATE TABLE USER_USED_NN(
 	USER_NO NUMBER NOT NULL, --> 사용자 번호(모든 사용자는 사용자 번호가 있어야 한다)
-							 --> 컬럼 레벨 제약 조건 설정
+				 --> 컬럼 레벨 제약 조건 설정
 	USER_ID VARCHAR2(20),
 	USER_PWD VARCHAR2(30),
 	USER_NAME VARCHAR2(30),
@@ -258,7 +258,7 @@ VALUES(1, NULL, 'PASS01', '홍길동', '남', '010-1234-1234', 'hong123@kh.or.kr
 -- 두개 이상의 컬럼을 묵어서 하나의 UNIQUE 제약 조건을 설정함
 
 -- * 복합키 지정은 테이블 레벨에서만 가능하다!
--- * 복합키는 지정된 모든 컬럼의 값이 같을 때 뒤배된다!
+-- * 복합키는 지정된 모든 컬럼의 값이 같을 때 위배된다!
 
 CREATE TABLE USER_USED_UK2(
 	USER_NO NUMBER,
